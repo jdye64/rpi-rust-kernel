@@ -10,7 +10,7 @@ This example kernel simply demonstrates a "blinking LED". To accomplish this of 
 
 ## Building Kernel
 - Add the rust target for armv7a - `rustup target add armv7a-none-eabi`
-- Compile the arm target - `cargo rustc -- -C link-arg=--script=./linker.ld`
+- Compile the arm target - `cargo rustc -- -C link-arg=--script=./linker.ld`, this custom linker script is required because the bootcode firmware expects the first instruction to being at 0x8000. This is out of our control so we must ensure we abide by those constraints. Likewise further details about pins and settings can be found at https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf
 At this point you are left with a ELF file named `my-rusty-pi`, this file is understood by Linux. However, for embedded development we need to export the executable contents of the ELF to a purely binary file. We do this by running `arm-none-eabi-objcopy -O binary target/armv7a-none-eabi/debug/my-rusty-pi ./kernel7.img`
 
 ## Deploying to RPI
