@@ -13,4 +13,5 @@ This example kernel simply demonstrates a "blinking LED". To accomplish this of 
 - Compile the arm target - `cargo rustc -- -C link-arg=--script=./linker.ld`
 At this point you are left with a ELF file named `my-rusty-pi`, this file is understood by Linux. However, for embedded development we need to export the executable contents of the ELF to a purely binary file. We do this by running `arm-none-eabi-objcopy -O binary target/armv7a-none-eabi/debug/my-rusty-pi ./kernel7.img`
 
+## Deploying to RPI
 The `kernel7.img` file along with `fixup.dat`, `start.elf`, and `bootcode.bin` (which were pulled from https://github.com/raspberrypi/firmware/tree/master/boot) can be written to a SD card and inserted into the Raspberry PI. If you have completely your wiring correctly when you boot the RPI device the LED light should blink as expected.
